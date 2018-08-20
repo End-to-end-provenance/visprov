@@ -1,0 +1,51 @@
+<!DOCTYPE project>
+<project
+  xmlns:if="ant:if"
+    xmlns:unless="ant:unless">
+    
+  <loadproperties srcFile="DESCRIPTION" />
+  <property name="tarfile" value="provViz_${Version}.tar.gz" />
+
+    <target name="roxygen">
+    	<exec executable="Rscript" >
+       		<arg line="-e devtools::document()" />
+        </exec>
+    </target>
+
+    <target name="build" depends="roxygen">
+      <exec executable="R" >
+        <arg line="CMD build --no-build-vignettes ."/>
+      </exec>
+    </target>
+
+    <target name="check" depends="build">
+      <exec executable="R" >
+        <arg line="CMD check --no-vignettes --no-build-vignettes ${tarfile}"/>
+      </exec>
+    </target>
+
+    <target name="lint">
+	    <exec executable="Rscript" >
+      		<arg line="-e lintr::lint_package()" />
+    	</exec>
+    </target>
+
+    <target name="install" depends="check">
+      <exec executable="R" >
+        <arg line="CMD INSTALL ${tarfile}"/>
+      </exec>
+    </target>
+    
+    <target name="install-no-check" depends="build">
+      <exec executable="R" >
+        <arg line="CMD INSTALL --no-clean-on-error ${tarfile}"/>
+    </exec>
+    </target>
+
+    <target name="cran-check" depends="build, lint">
+    	<exec executable="R" >
+    		<arg line="CMD check --as-cran --no-vignettes --no-build-vignettes ${tarfile}"/>
+    	</exec>
+    </target>
+  
+</project>

@@ -1,0 +1,4 @@
+linters: with_defaults (snake_case_linter = NULL,
+						camel_case_linter = NULL,
+						multiple_dots_linter = NULL,
+						absolute_paths_linter = NULL)
