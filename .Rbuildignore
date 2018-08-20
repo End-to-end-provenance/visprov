@@ -1,0 +1,3 @@
+^\.lintr$
+^build\.xml$
+.*\.tar\.gz$

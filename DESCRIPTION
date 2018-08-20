@@ -1,0 +1,38 @@
+Package: provViz
+Title: Provenance Visualizer
+Version: 1.0.0
+Date: 2018-08-16
+Authors@R: c( person( "Emery", "Boose", role = c("ctb"),
+                      email = "boose@fas.harvard.edu"),
+              person("Barbara", "Lerner", role = c("aut", "cre"),
+                      email = "blerner@mtholyoke.edu"),
+              person("Sofiya", "Taskova", role = "aut",
+              		  email = "sophiataskova@gmail.com"),
+              person("Miruna", "Oprescu", role = "aut",
+                      email = "aoprescu@college.harvard.edu"),
+              person("Nikki", "Hoffler", role = "aut",
+                      email = "hoffl22n@mtholyoke.edu"),
+              person("Marios", "Dardas", role = "aut",
+                      email = "mzdard16@g.holycross.edu"),
+              person( "Elizabeth", "Fong", role = "ctb",
+                      email = "fong22e@mtholyoke.edu"),
+              person( "Thomas", "Pasquier", role = "ctb",
+                      email = "thomas.francis.pasquier@gmail.com"),
+              person( "Matthew", "Lau", role = "ctb",
+                      email = "matthewklau@fas.harvard.edu"),
+              person( "Aaron", "Ellison", role = "res",
+                      email = "aellison@fas.harvard.edu"),
+              person( "Margo", "Seltzer", role = "res",
+                      email = "margo@eecs.harvard.edu")
+                      )
+Copyright: President and Fellows of Harvard College, Trustees of Mount Holyoke College
+Depends: R (>= 3.5.0)
+Description: Displays provenance graphically for provenance collected by the provR or
+  RDataTracker packages, or other tools providing compatible PROV JSON output.
+License: GPL-3 | file LICENSE
+URL: https://github.com/ProvTools/provViz
+BugReports: https://github.com/End-to-end-provenance/provViz/issues
+RoxygenNote: 6.0.1
+Imports:
+  RDataTracker,
+  provR
