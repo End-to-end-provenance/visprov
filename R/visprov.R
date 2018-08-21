@@ -64,6 +64,8 @@ ddgexplorer <- function (json.path) {
 #'    "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
 #'    provR will be used if it is loaded.  If provR is not loaded and RDataTracker
 #'    is loaded, RDataTracker will be used.  If neither has been loaded, provR is used.
+#' @param ... If r.script.path is set, these parameters will passed to prov.run to 
+#'    collect the provenance.
 #' 
 #' @export
 #' @examples 
@@ -71,7 +73,7 @@ ddgexplorer <- function (json.path) {
 #' \dontrun{prov.visualize ("script.R")}
 #' \dontrun{prov.visualize ("script.R", tool = "provR")}
 
-prov.visualize <- function (r.script.path = NULL, tool = NULL) {
+prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
 
 # Known problems:
 #    If the user calls this with NULL for r.script.path but prov.run
@@ -109,7 +111,8 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL) {
 
   # Run the script, collecting provenance, if a script was provided.
   if (!is.null (r.script.path)) {
-    prov.run(r.script.path)
+    tryCatch (prov.run(r.script.path, ...),
+        error = function (e) {})
   }
 
   # Write the json to a file
