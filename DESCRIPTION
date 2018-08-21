@@ -33,6 +33,6 @@ License: GPL-3 | file LICENSE
 URL: https://github.com/ProvTools/provViz
 BugReports: https://github.com/End-to-end-provenance/provViz/issues
 RoxygenNote: 6.0.1
-Imports:
+Suggests:
   RDataTracker,
   provR

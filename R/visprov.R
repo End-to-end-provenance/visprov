@@ -61,15 +61,19 @@ ddgexplorer <- function (json.path) {
 #'         is NULL, the last ddg captured will be displayed.
 #' @param tool If an R script is passed in, this is the tool that will be used
 #'    to collect provenance.  Currently, the known choices are "provR" and 
-#'    "RDataTracker", which can be given as "rdt".  The string is case-insensitive.
+#'    "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
+#'    provR will be used if it is loaded.  If provR is not loaded and RDataTracker
+#'    is loaded, RDataTracker will be used.  If neither has been loaded, provR is used.
+#' @param ... If r.script.path is set, these parameters will passed to prov.run to 
+#'    collect the provenance.
 #' 
 #' @export
 #' @examples 
 #' \dontrun{prov.visualize ()}
 #' \dontrun{prov.visualize ("script.R")}
-#' \dontrun{prov.visualize ("script.R", tool = "RDataTracker")}
+#' \dontrun{prov.visualize ("script.R", tool = "provR")}
 
-prov.visualize <- function (r.script.path = NULL, tool = "provR") {
+prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
 
 # Known problems:
 #    If the user calls this with NULL for r.script.path but prov.run
@@ -78,7 +82,21 @@ prov.visualize <- function (r.script.path = NULL, tool = "provR") {
 #    that case so we can check that condition.
 
   # Load the appropriate library
-  tool <- tolower (tool)
+  if (is.null (tool)) {
+    loaded <- loadedNamespaces()
+    if ("provR" %in% loaded) {
+      tool <- "provr"
+    }
+    else if ("RDataTracker" %in% loaded) {
+      tool <- "rdt"
+    }
+    else {
+      tool <- "provr"
+    }
+  }
+  else {
+    tool <- tolower (tool)
+  }
   if (tool == "rdt" || tool == "rdatatracker") {
     prov.run <- RDataTracker::prov.run
     prov.json <- RDataTracker::prov.json
@@ -93,7 +111,8 @@ prov.visualize <- function (r.script.path = NULL, tool = "provR") {
 
   # Run the script, collecting provenance, if a script was provided.
   if (!is.null (r.script.path)) {
-    prov.run(r.script.path)
+    tryCatch (prov.run(r.script.path, ...),
+        error = function (e) {})
   }
 
   # Write the json to a file
