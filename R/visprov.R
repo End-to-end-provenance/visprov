@@ -63,7 +63,10 @@ ddgexplorer <- function (json.path) {
 #'    to collect provenance.  Currently, the known choices are "provR" and 
 #'    "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
 #'    provR will be used if it is loaded.  If provR is not loaded and RDataTracker
-#'    is loaded, RDataTracker will be used.  If neither has been loaded, provR is used.
+#'    is loaded, RDataTracker will be used.  If neither has been loaded, it then checks
+#'    to see if either is installed.  If provR is installed, it will be use.  If 
+#'    provR is not installed but RDataTracker is installed, RDataTracker will be
+#'    used.  If neither is installed, an error is reported.
 #' @param ... If r.script.path is set, these parameters will passed to prov.run to 
 #'    collect the provenance.
 #' 
@@ -91,7 +94,16 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
       tool <- "rdt"
     }
     else {
-      tool <- "provr"
+      installed <- installed.packages ()
+      if ("provR" %in% installed) {
+        tool <- "provr"
+      }
+      else if ("RDataTracker" %in% installed) {
+        tool <- "rdt"
+      }
+      else {
+        stop ("One of provR or RDataTracker must be installed.")
+      }
     }
   }
   else {
@@ -116,10 +128,16 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
   }
 
   # Write the json to a file
-  base.dir <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
-  ddgjson.path <- paste(base.dir, ".ddg.json", sep = "/")
-  writeLines (prov.json(), ddgjson.path)
-
+  #base.dir <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
+  #ddgjson.path <- paste(base.dir, ".ddg.json", sep = "/")
+  #writeLines (prov.json(), ddgjson.path)
+  
+  json.text <- strsplit(prov.json(), "\n")[[1]]
+  provDir.line <- json.text [grep("rdt:ddgDirectory",json.text)]
+  provDir <- substring(provDir.line, 25)
+  provDir <- substring (provDir, 1, nchar(provDir) - 2)
+  json.file <- paste(provDir, "prov.json", sep = "/")
+  
   # Display the ddg
-  ddgexplorer(ddgjson.path)
+  ddgexplorer(json.file)
 }

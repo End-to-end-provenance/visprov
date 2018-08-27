@@ -1,3 +1,7 @@
-^\.lintr$
 ^build\.xml$
 .*\.tar\.gz$
+.gitignore
+.project
+..Rcheck
+.git
+.lintr
