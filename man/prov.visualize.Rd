@@ -15,7 +15,10 @@ is NULL, the last ddg captured will be displayed.}
 to collect provenance.  Currently, the known choices are "provR" and 
 "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
 provR will be used if it is loaded.  If provR is not loaded and RDataTracker
-is loaded, RDataTracker will be used.  If neither has been loaded, provR is used.}
+is loaded, RDataTracker will be used.  If neither has been loaded, it then checks
+to see if either is installed.  If provR is installed, it will be use.  If 
+provR is not installed but RDataTracker is installed, RDataTracker will be
+used.  If neither is installed, an error is reported.}
 
 \item{...}{If r.script.path is set, these parameters will passed to prov.run to 
 collect the provenance.}

@@ -127,11 +127,7 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
         error = function (e) {})
   }
 
-  # Write the json to a file
-  #base.dir <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
-  #ddgjson.path <- paste(base.dir, ".ddg.json", sep = "/")
-  #writeLines (prov.json(), ddgjson.path)
-  
+  # Find out where the provenance is stored.
   json.text <- strsplit(prov.json(), "\n")[[1]]
   provDir.line <- json.text [grep("rdt:ddgDirectory",json.text)]
   provDir <- substring(provDir.line, 25)
