@@ -94,7 +94,7 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
       tool <- "rdt"
     }
     else {
-      installed <- installed.packages ()
+      installed <- utils::installed.packages ()
       if ("provR" %in% installed) {
         tool <- "provr"
       }
@@ -110,15 +110,15 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
     tool <- tolower (tool)
   }
   if (tool == "rdt" || tool == "rdatatracker") {
-    prov.run <- RDataTracker::prov.run
-    prov.json <- RDataTracker::prov.json
+    prov.vis <- RDataTracker::prov.run
+    prov.dir <- RDataTracker::prov.dir
   }
   else {
     if (tool != "provr") {
       print (paste ("Unknown tool: ", tool, "using provR"))
     }
     prov.run <- provR::prov.run
-    prov.json <- provR::prov.json
+    prov.dir <- provR::prov.dir
   }
 
   # Run the script, collecting provenance, if a script was provided.
@@ -128,11 +128,7 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
   }
 
   # Find out where the provenance is stored.
-  json.text <- strsplit(prov.json(), "\n")[[1]]
-  provDir.line <- json.text [grep("rdt:ddgDirectory",json.text)]
-  provDir <- substring(provDir.line, 25)
-  provDir <- substring (provDir, 1, nchar(provDir) - 2)
-  json.file <- paste(provDir, "prov.json", sep = "/")
+  json.file <- paste(prov.dir(), "prov.json", sep = "/")
   
   # Display the ddg
   ddgexplorer(json.file)
