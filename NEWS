@@ -1,0 +1,7 @@
+provViz v1.0.1 (Release date: 2018-09-06)
+==============
+
+Changes:
+
+* Added support for R's graphics device nodes
+
