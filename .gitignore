@@ -1,5 +1,7 @@
 /.project
 /.Rhistory
 /provViz.Rcheck/
-/provViz_1.0.0.tar.gz
+/.*.tar.gz
 /..Rcheck/
+/provViz_1.0.0.tar.gz
+/provViz_1.0.1.tar.gz
