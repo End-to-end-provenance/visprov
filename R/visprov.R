@@ -33,6 +33,8 @@ ddg.explorer.port <- 6096
 # Parameter:  json.path - the path to a prov json file created by
 # provR.
 ddgexplorer <- function (json.path) {
+  print (paste ("Reading json from ", json.path))
+  
   # See if the server is already running
   tryCatch ({
     con <- socketConnection(host = "localhost", port = ddg.explorer.port,
@@ -40,11 +42,13 @@ ddgexplorer <- function (json.path) {
                             timeout = 1)
 
     # Send the filename to DDG Explorer
+    print ("Connecting to DDG Explorer")
     writeLines(json.path, con)
     close(con)
   },
   warning = function(e) {
     # The server was not running.  Start it.
+    print ("Starting DDG Explorer")
     .ddg.start.ddg.explorer(json.path)
   }
   )
