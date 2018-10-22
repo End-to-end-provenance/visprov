@@ -68,11 +68,13 @@ ddgexplorer <- function (json.path) {
 #'    "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
 #'    provR will be used if it is loaded.  If provR is not loaded and RDataTracker
 #'    is loaded, RDataTracker will be used.  If neither has been loaded, it then checks
-#'    to see if either is installed.  If provR is installed, it will be use.  If 
+#'    to see if either is installed.  If provR is installed, it will be used.  If 
 #'    provR is not installed but RDataTracker is installed, RDataTracker will be
 #'    used.  If neither is installed, an error is reported.
-#' @param ... If r.script.path is set, these parameters will passed to prov.run to 
-#'    collect the provenance.
+#' @param ... If r.script.path is set, these parameters will be passed to prov.run to 
+#'    control how provenance is collected.  
+#'    See provR's prov.run function
+#'    or RDataTracker's prov.run function for details.
 #' 
 #' @export
 #' @examples 
