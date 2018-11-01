@@ -12,18 +12,18 @@ executed with provenance captured by the specified tool.  If r.script.path
 is NULL, the last ddg captured will be displayed.}
 
 \item{tool}{If an R script is passed in, this is the tool that will be used
-to collect provenance.  Currently, the known choices are "provR" and 
-"RDataTracker", which can be given as "rdt".  If no tool name is passed in,
-provR will be used if it is loaded.  If provR is not loaded and RDataTracker
-is loaded, RDataTracker will be used.  If neither has been loaded, it then checks
-to see if either is installed.  If provR is installed, it will be used.  If 
-provR is not installed but RDataTracker is installed, RDataTracker will be
+to collect provenance.  Currently, the known choices are "rdt" and 
+"rdtLite".  If no tool name is passed in,
+rdtLite will be used if it is loaded.  If rdtLite is not loaded and rdt
+is loaded, rdt will be used.  If neither has been loaded, it then checks
+to see if either is installed.  If rdtLite is installed, it will be used.  If 
+rdtLite is not installed but rdt is installed, rdt will be
 used.  If neither is installed, an error is reported.}
 
 \item{...}{If r.script.path is set, these parameters will be passed to prov.run to 
 control how provenance is collected.  
-See provR's prov.run function
-or RDataTracker's prov.run function for details.}
+See rdt's prov.run function
+or rdtLites's prov.run function for details.}
 }
 \description{
 Display a provenance graph visually.
@@ -31,5 +31,5 @@ Display a provenance graph visually.
 \examples{
 \dontrun{prov.visualize ()}
 \dontrun{prov.visualize ("script.R")}
-\dontrun{prov.visualize ("script.R", tool = "provR")}
+\dontrun{prov.visualize ("script.R", tool = "rdtLite")}
 }
