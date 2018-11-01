@@ -27,12 +27,12 @@ Authors@R: c( person( "Emery", "Boose", role = c("ctb"),
                       )
 Copyright: President and Fellows of Harvard College, Trustees of Mount Holyoke College
 Depends: R (>= 3.5.0)
-Description: Displays provenance graphically for provenance collected by the provR or
-  RDataTracker packages, or other tools providing compatible PROV JSON output.
+Description: Displays provenance graphically for provenance collected by the rdt or
+  rdtLite packages, or other tools providing compatible PROV JSON output.
 License: GPL-3 | file LICENSE
 URL: https://github.com/ProvTools/provViz
 BugReports: https://github.com/End-to-end-provenance/provViz/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests:
-  RDataTracker,
-  provR
+  rdt,
+  rdtLite

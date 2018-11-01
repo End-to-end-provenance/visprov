@@ -1,5 +1,5 @@
 # A simple tool that allows the user to visualize a provenance
-# graph collected by provR or RDataTracker, using DDG Explorer
+# graph collected by rdt or rdtLite, using DDG Explorer
 #
 
 # The port that the DDG Explorer server runs on
@@ -8,7 +8,7 @@ ddg.explorer.port <- 6096
 # Start the DDG Explorer server.  This should not be called if the
 # server is already running.  DDGExplorer.jar must be on .libPaths.
 #
-# Parameter:  json.path - A file containing json produced by provR.
+# Parameter:  json.path - A file containing json produced by rdt or rdtLite.
 #
 .ddg.start.ddg.explorer <- function (json.path) {
   jar.path <- "/provViz/java/DDGExplorer.jar"
@@ -31,7 +31,7 @@ ddg.explorer.port <- 6096
 # will appear containing the new DDG.
 #
 # Parameter:  json.path - the path to a prov json file created by
-# provR.
+# rdt or rdtLite.
 ddgexplorer <- function (json.path) {
   print (paste ("Reading json from ", json.path))
   
@@ -64,23 +64,23 @@ ddgexplorer <- function (json.path) {
 #'         executed with provenance captured by the specified tool.  If r.script.path
 #'         is NULL, the last ddg captured will be displayed.
 #' @param tool If an R script is passed in, this is the tool that will be used
-#'    to collect provenance.  Currently, the known choices are "provR" and 
-#'    "RDataTracker", which can be given as "rdt".  If no tool name is passed in,
-#'    provR will be used if it is loaded.  If provR is not loaded and RDataTracker
-#'    is loaded, RDataTracker will be used.  If neither has been loaded, it then checks
-#'    to see if either is installed.  If provR is installed, it will be used.  If 
-#'    provR is not installed but RDataTracker is installed, RDataTracker will be
+#'    to collect provenance.  Currently, the known choices are "rdt" and 
+#'    "rdtLite".  If no tool name is passed in,
+#'    rdtLite will be used if it is loaded.  If rdtLite is not loaded and rdt
+#'    is loaded, rdt will be used.  If neither has been loaded, it then checks
+#'    to see if either is installed.  If rdtLite is installed, it will be used.  If 
+#'    rdtLite is not installed but rdt is installed, rdt will be
 #'    used.  If neither is installed, an error is reported.
 #' @param ... If r.script.path is set, these parameters will be passed to prov.run to 
 #'    control how provenance is collected.  
-#'    See provR's prov.run function
-#'    or RDataTracker's prov.run function for details.
+#'    See rdt's prov.run function
+#'    or rdtLites's prov.run function for details.
 #' 
 #' @export
 #' @examples 
 #' \dontrun{prov.visualize ()}
 #' \dontrun{prov.visualize ("script.R")}
-#' \dontrun{prov.visualize ("script.R", tool = "provR")}
+#' \dontrun{prov.visualize ("script.R", tool = "rdtLite")}
 
 prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
 
@@ -93,38 +93,38 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
   # Load the appropriate library
   if (is.null (tool)) {
     loaded <- loadedNamespaces()
-    if ("provR" %in% loaded) {
-      tool <- "provr"
+    if ("rdtLite" %in% loaded) {
+      tool <- "rdtLite"
     }
-    else if ("RDataTracker" %in% loaded) {
+    else if ("rdt" %in% loaded) {
       tool <- "rdt"
     }
     else {
       installed <- utils::installed.packages ()
-      if ("provR" %in% installed) {
-        tool <- "provr"
+      if ("rdtLite" %in% installed) {
+        tool <- "rdtLite"
       }
-      else if ("RDataTracker" %in% installed) {
+      else if ("rdt" %in% installed) {
         tool <- "rdt"
       }
       else {
-        stop ("One of provR or RDataTracker must be installed.")
+        stop ("One of rdtLite or rdt must be installed.")
       }
     }
   }
   else {
     tool <- tolower (tool)
   }
-  if (tool == "rdt" || tool == "rdatatracker") {
-    prov.vis <- RDataTracker::prov.run
-    prov.dir <- RDataTracker::prov.dir
+  if (tool == "rdt") {
+    prov.vis <- rdt::prov.run
+    prov.dir <- rdt::prov.dir
   }
   else {
-    if (tool != "provr") {
-      print (paste ("Unknown tool: ", tool, "using provR"))
+    if (tool != "rdtLite") {
+      print (paste ("Unknown tool: ", tool, "using rdtLite"))
     }
-    prov.run <- provR::prov.run
-    prov.dir <- provR::prov.dir
+    prov.run <- rdtLite::prov.run
+    prov.dir <- rdtLite::prov.dir
   }
 
   # Run the script, collecting provenance, if a script was provided.
