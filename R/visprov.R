@@ -58,12 +58,72 @@ ddgexplorer <- function (json.path) {
 
 #' prov.visualize
 #' 
-#' Display a provenance graph visually.
+#' prov.visualize displays the provenance graph for the last provenance
+#' collected in this R session.
+#'
+#' @export
+#' @examples 
+#' \dontrun{prov.visualize ()}
+#' @rdname prov.visualize
+
+prov.visualize <- function (tool = NULL) {
+  
+  # Load the appropriate library
+  if (is.null (tool)) {
+    loaded <- loadedNamespaces()
+    if ("rdtLite" %in% loaded) {
+      tool <- "rdtLite"
+    }
+    else if ("rdt" %in% loaded) {
+      tool <- "rdt"
+    }
+    else {
+      installed <- utils::installed.packages ()
+      if ("rdtLite" %in% installed) {
+        tool <- "rdtLite"
+      }
+      else if ("rdt" %in% installed) {
+        tool <- "rdt"
+      }
+      else {
+        stop ("One of rdtLite or rdt must be installed.")
+      }
+    }
+  }
+  else {
+    tool <- tolower (tool)
+  }
+  if (tool == "rdt") {
+    prov.dir <- rdt::prov.dir
+  }
+  else {
+    if (tool != "rdtLite") {
+      print (paste ("Unknown tool: ", tool, "using rdtLite"))
+    }
+    prov.dir <- rdtLite::prov.dir
+  }
+  
+  # Find out where the provenance is stored.
+  provDir <- prov.dir()
+  if (!is.null (provDir)) {
+    json.file <- paste(prov.dir(), "prov.json", sep = "/")
+  
+    # Display the ddg
+    ddgexplorer(json.file)
+  }
+  else {
+    print ("No provenance has been collected yet.  Try prov.visualize.run (r.script.path).")
+  }
+
+}
+
+#' prov.visualize.run
+#' 
+#' prov.visualize.run runs an R script and displays its provenance graph visually.
 #'
 #' @param r.script.path The path to an R script.  This script will be 
-#'         executed with provenance captured by the specified tool.  If r.script.path
-#'         is NULL, the last ddg captured will be displayed.
-#' @param tool If an R script is passed in, this is the tool that will be used
+#'         executed with provenance captured by the specified tool.
+#' @param tool This is the tool that was or will be used
 #'    to collect provenance.  Currently, the known choices are "rdt" and 
 #'    "rdtLite".  If no tool name is passed in,
 #'    rdtLite will be used if it is loaded.  If rdtLite is not loaded and rdt
@@ -78,18 +138,10 @@ ddgexplorer <- function (json.path) {
 #' 
 #' @export
 #' @examples 
-#' \dontrun{prov.visualize ()}
-#' \dontrun{prov.visualize ("script.R")}
-#' \dontrun{prov.visualize ("script.R", tool = "rdtLite")}
-
-prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
-
-# Known problems:
-#    If the user calls this with NULL for r.script.path but prov.run
-#    has not been run yet in the session, there is a json string returned
-#    but it is not valid.  prov.json should probably return NULL in
-#    that case so we can check that condition.
-
+#' \dontrun{prov.visualize.run ("script.R")}
+#' \dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
+#' @rdname prov.visualize
+prov.visualize.run <- function (r.script.path, tool = NULL, ...) {
   # Load the appropriate library
   if (is.null (tool)) {
     loaded <- loadedNamespaces()
@@ -128,10 +180,8 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
   }
 
   # Run the script, collecting provenance, if a script was provided.
-  if (!is.null (r.script.path)) {
-    tryCatch (prov.run(r.script.path, ...),
-        error = function (e) {})
-  }
+  tryCatch (prov.run(r.script.path, ...),
+      error = function (e) {})
 
   # Find out where the provenance is stored.
   json.file <- paste(prov.dir(), "prov.json", sep = "/")
@@ -139,3 +189,20 @@ prov.visualize <- function (r.script.path = NULL, tool = NULL, ...) {
   # Display the ddg
   ddgexplorer(json.file)
 }
+
+#' prov.visualize.file
+#' 
+#' prov.visualize.file displays provenance stored in a file graphically
+#' 
+#' @param prov.file the name of a file containing provenance that has been
+#'    created by rdt or rdtLite, or another tool producing compatible
+#'    provenance output.
+#' 
+#' @export
+#' @examples 
+#' \dontrun{prov.visualize.file ("prov.json")}
+#' @rdname prov.visualize
+prov.visualize.file <- function (prov.file) {
+  ddgexplorer(prov.file)
+}
+
