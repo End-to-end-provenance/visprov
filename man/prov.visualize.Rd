@@ -2,15 +2,17 @@
 % Please edit documentation in R/visprov.R
 \name{prov.visualize}
 \alias{prov.visualize}
+\alias{prov.visualize.run}
+\alias{prov.visualize.file}
 \title{prov.visualize}
 \usage{
-prov.visualize(r.script.path = NULL, tool = NULL, ...)
+prov.visualize(tool = NULL)
+
+prov.visualize.run(r.script.path, tool = NULL, ...)
+
+prov.visualize.file(prov.file)
 }
 \arguments{
-\item{r.script.path}{The path to an R script.  This script will be 
-executed with provenance captured by the specified tool.  If r.script.path
-is NULL, the last ddg captured will be displayed.}
-
 \item{tool}{If an R script is passed in, this is the tool that will be used
 to collect provenance.  Currently, the known choices are "rdt" and 
 "rdtLite".  If no tool name is passed in,
@@ -20,16 +22,29 @@ to see if either is installed.  If rdtLite is installed, it will be used.  If
 rdtLite is not installed but rdt is installed, rdt will be
 used.  If neither is installed, an error is reported.}
 
+\item{r.script.path}{The path to an R script.  This script will be 
+executed with provenance captured by the specified tool.}
+
 \item{...}{If r.script.path is set, these parameters will be passed to prov.run to 
 control how provenance is collected.  
 See rdt's prov.run function
 or rdtLites's prov.run function for details.}
+
+\item{prov.file}{the name of a file containing provenance that has been
+created by rdt or rdtLite, or another tool producing compatible
+provenance output.}
 }
 \description{
-Display a provenance graph visually.
+prov.visualize displays the provenance graph for the last provenance
+collected in this R session.
+
+prov.visualize.run runs an R script and displays its provenance graph visually.
+
+prov.visualize.file displays provenance stored in a file graphically
 }
 \examples{
 \dontrun{prov.visualize ()}
-\dontrun{prov.visualize ("script.R")}
-\dontrun{prov.visualize ("script.R", tool = "rdtLite")}
+\dontrun{prov.visualize.run ("script.R")}
+\dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
+\dontrun{prov.visualize.file ("prov.json")}
 }
