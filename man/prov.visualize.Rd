@@ -13,7 +13,7 @@ prov.visualize.run(r.script.path, tool = NULL, ...)
 prov.visualize.file(prov.file)
 }
 \arguments{
-\item{tool}{If an R script is passed in, this is the tool that will be used
+\item{tool}{This is the tool that was or will be used
 to collect provenance.  Currently, the known choices are "rdt" and 
 "rdtLite".  If no tool name is passed in,
 rdtLite will be used if it is loaded.  If rdtLite is not loaded and rdt
