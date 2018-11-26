@@ -104,9 +104,9 @@ prov.visualize <- function (tool = NULL) {
   }
   
   # Find out where the provenance is stored.
-  provDir <- prov.dir()
+  provDir <- path.expand(prov.dir())
   if (!is.null (provDir)) {
-    json.file <- paste(prov.dir(), "prov.json", sep = "/")
+    json.file <- paste(provDir, "prov.json", sep = "/")
   
     # Display the ddg
     ddgexplorer(json.file)
