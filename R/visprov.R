@@ -72,21 +72,17 @@ prov.visualize <- function (tool = NULL) {
   if (is.null (tool)) {
     loaded <- loadedNamespaces()
     if ("rdtLite" %in% loaded) {
-      print ("rdtLite is loaded")
       tool <- "rdtLite"
     }
     else if ("rdt" %in% loaded) {
-      print ("rdt is loaded")
       tool <- "rdt"
     }
     else {
       installed <- utils::installed.packages ()
       if ("rdtLite" %in% installed) {
-        print ("rdtLite is installe")
         tool <- "rdtLite"
       }
       else if ("rdt" %in% installed) {
-        print ("rdtLite is installe")
         tool <- "rdt"
       }
       else {
@@ -97,7 +93,6 @@ prov.visualize <- function (tool = NULL) {
   else {
     tool <- tolower (tool)
   }
-  print (paste ("Using", tool))
   if (tool == "rdt") {
     prov.dir <- rdt::prov.dir
   }
@@ -110,10 +105,8 @@ prov.visualize <- function (tool = NULL) {
   
   # Find out where the provenance is stored.
   provDir <- path.expand(prov.dir())
-  print (paste ("Provenance directory is", provDir))
   if (!is.null (provDir)) {
     json.file <- paste(provDir, "prov.json", sep = "/")
-    print (paste ("Reading provenance from", json.file))
   
     # Display the ddg
     ddgexplorer(json.file)
