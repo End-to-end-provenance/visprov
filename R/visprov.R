@@ -72,7 +72,7 @@ prov.visualize <- function (tool = NULL) {
   if (is.null (tool)) {
     loaded <- loadedNamespaces()
     if ("rdtLite" %in% loaded) {
-      tool <- "rdtLite"
+      tool <- "rdtlite"
     }
     else if ("rdt" %in% loaded) {
       tool <- "rdt"
@@ -80,7 +80,7 @@ prov.visualize <- function (tool = NULL) {
     else {
       installed <- utils::installed.packages ()
       if ("rdtLite" %in% installed) {
-        tool <- "rdtLite"
+        tool <- "rdtlite"
       }
       else if ("rdt" %in% installed) {
         tool <- "rdt"
@@ -97,7 +97,7 @@ prov.visualize <- function (tool = NULL) {
     prov.dir <- rdt::prov.dir
   }
   else {
-    if (tool != "rdtLite") {
+    if (tool != "rdtlite") {
       print (paste ("Unknown tool: ", tool, "using rdtLite"))
     }
     prov.dir <- rdtLite::prov.dir
