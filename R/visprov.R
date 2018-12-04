@@ -34,7 +34,7 @@ ddg.explorer.port <- 6096
 # rdt or rdtLite.
 ddgexplorer <- function (json.path) {
   print (paste ("Reading json from ", json.path))
-  
+
   # See if the server is already running
   tryCatch ({
     con <- socketConnection(host = "localhost", port = ddg.explorer.port,
@@ -60,54 +60,49 @@ ddgexplorer <- function (json.path) {
 #' 
 #' prov.visualize displays the provenance graph for the last provenance
 #' collected in this R session.
+#' 
+#' These functions use provenance collected using the rdtLite or rdt packages.
 #'
 #' @export
 #' @examples 
 #' \dontrun{prov.visualize ()}
 #' @rdname prov.visualize
 
-prov.visualize <- function (tool = NULL) {
-  
+prov.visualize <- function () {
+
   # Load the appropriate library
-  if (is.null (tool)) {
-    loaded <- loadedNamespaces()
-    if ("rdtLite" %in% loaded) {
-      tool <- "rdtlite"
+  loaded <- loadedNamespaces()
+  if ("rdtLite" %in% loaded) {
+    tool <- "rdtLite"
+  }
+  else if ("rdt" %in% loaded) {
+    tool <- "rdt"
+  }
+  else {
+    installed <- utils::installed.packages ()
+    if ("rdtLite" %in% installed) {
+      tool <- "rdtLite"
     }
-    else if ("rdt" %in% loaded) {
+    else if ("rdt" %in% installed) {
       tool <- "rdt"
     }
     else {
-      installed <- utils::installed.packages ()
-      if ("rdtLite" %in% installed) {
-        tool <- "rdtlite"
-      }
-      else if ("rdt" %in% installed) {
-        tool <- "rdt"
-      }
-      else {
-        stop ("One of rdtLite or rdt must be installed.")
-      }
+      stop ("One of rdtLite or rdt must be installed.")
     }
   }
-  else {
-    tool <- tolower (tool)
-  }
+
   if (tool == "rdt") {
     prov.dir <- rdt::prov.dir
   }
   else {
-    if (tool != "rdtlite") {
-      print (paste ("Unknown tool: ", tool, "using rdtLite"))
-    }
     prov.dir <- rdtLite::prov.dir
   }
-  
+
   # Find out where the provenance is stored.
   provDir <- path.expand(prov.dir())
   if (!is.null (provDir)) {
     json.file <- paste(provDir, "prov.json", sep = "/")
-  
+
     # Display the ddg
     ddgexplorer(json.file)
   }
@@ -115,79 +110,6 @@ prov.visualize <- function (tool = NULL) {
     print ("No provenance has been collected yet.  Try prov.visualize.run (r.script.path).")
   }
 
-}
-
-#' prov.visualize.run
-#' 
-#' prov.visualize.run runs an R script and displays its provenance graph visually.
-#'
-#' @param r.script.path The path to an R script.  This script will be 
-#'         executed with provenance captured by the specified tool.
-#' @param tool This is the tool that was or will be used
-#'    to collect provenance.  Currently, the known choices are "rdt" and 
-#'    "rdtLite".  If no tool name is passed in,
-#'    rdtLite will be used if it is loaded.  If rdtLite is not loaded and rdt
-#'    is loaded, rdt will be used.  If neither has been loaded, it then checks
-#'    to see if either is installed.  If rdtLite is installed, it will be used.  If 
-#'    rdtLite is not installed but rdt is installed, rdt will be
-#'    used.  If neither is installed, an error is reported.
-#' @param ... If r.script.path is set, these parameters will be passed to prov.run to 
-#'    control how provenance is collected.  
-#'    See rdt's prov.run function
-#'    or rdtLites's prov.run function for details.
-#' 
-#' @export
-#' @examples 
-#' \dontrun{prov.visualize.run ("script.R")}
-#' \dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
-#' @rdname prov.visualize
-prov.visualize.run <- function (r.script.path, tool = NULL, ...) {
-  # Load the appropriate library
-  if (is.null (tool)) {
-    loaded <- loadedNamespaces()
-    if ("rdtLite" %in% loaded) {
-      tool <- "rdtLite"
-    }
-    else if ("rdt" %in% loaded) {
-      tool <- "rdt"
-    }
-    else {
-      installed <- utils::installed.packages ()
-      if ("rdtLite" %in% installed) {
-        tool <- "rdtLite"
-      }
-      else if ("rdt" %in% installed) {
-        tool <- "rdt"
-      }
-      else {
-        stop ("One of rdtLite or rdt must be installed.")
-      }
-    }
-  }
-  else {
-    tool <- tolower (tool)
-  }
-  if (tool == "rdt") {
-    prov.vis <- rdt::prov.run
-    prov.dir <- rdt::prov.dir
-  }
-  else {
-    if (tool != "rdtLite") {
-      print (paste ("Unknown tool: ", tool, "using rdtLite"))
-    }
-    prov.run <- rdtLite::prov.run
-    prov.dir <- rdtLite::prov.dir
-  }
-
-  # Run the script, collecting provenance, if a script was provided.
-  tryCatch (prov.run(r.script.path, ...),
-      error = function (e) {})
-
-  # Find out where the provenance is stored.
-  json.file <- paste(prov.dir(), "prov.json", sep = "/")
-  
-  # Display the ddg
-  ddgexplorer(json.file)
 }
 
 #' prov.visualize.file
@@ -206,3 +128,63 @@ prov.visualize.file <- function (prov.file) {
   ddgexplorer(prov.file)
 }
 
+#' prov.visualize.run
+#' 
+#' prov.visualize.run runs an R script and displays its provenance graph visually.
+#'
+#' @param r.script.path The path to an R script.  This script will be 
+#'         executed with provenance captured by the specified tool.
+#' @param ... If r.script.path is set, these parameters will be passed to prov.run to 
+#'    control how provenance is collected.  
+#'    See rdt's prov.run function
+#'    or rdtLites's prov.run function for details.
+#' 
+#' @export
+#' @examples 
+#' \dontrun{prov.visualize.run ("script.R")}
+#' \dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
+#' @rdname prov.visualize
+prov.visualize.run <- function (r.script.path,  ...) {
+  # Load the appropriate library
+  loaded <- loadedNamespaces()
+  if ("rdtLite" %in% loaded) {
+    tool <- "rdtLite"
+  }
+  else if ("rdt" %in% loaded) {
+    tool <- "rdt"
+  }
+  else {
+    installed <- utils::installed.packages ()
+    if ("rdtLite" %in% installed) {
+      tool <- "rdtLite"
+    }
+    else if ("rdt" %in% installed) {
+      tool <- "rdt"
+    }
+    else {
+      stop ("One of rdtLite or rdt must be installed.")
+    }
+  }
+
+  if (tool == "rdt") {
+    prov.run <- rdt::prov.run
+    prov.dir <- rdt::prov.dir
+  }
+  else {
+    if (tool != "rdtLite") {
+      print (paste ("Unknown tool: ", tool, "using rdtLite"))
+    }
+    prov.run <- rdtLite::prov.run
+    prov.dir <- rdtLite::prov.dir
+  }
+
+  # Run the script, collecting provenance, if a script was provided.
+  tryCatch (prov.run(r.script.path, ...),
+      error = function (e) {})
+
+  # Find out where the provenance is stored.
+  json.file <- paste(prov.dir(), "prov.json", sep = "/")
+
+  # Display the ddg
+  ddgexplorer(json.file)
+}
