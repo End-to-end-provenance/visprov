@@ -1,0 +1,9 @@
+DDGEXplorer.jar contains its source code within the jar file
+
+Source code to the freehep packages is available at http://java.freehep.org/svn.html
+
+Source code for the remaining jar files can be found in the following locations:
+
+gson-2.6.2.jar: https://github.com/google/gson
+jdiff.jar:  https://sourceforge.net/p/javadiff/code/
+prefuse.jar: http://prefuse.org/
