@@ -1,3 +1,10 @@
+provViz v1.0.3 (Release date: 2018-12-14)
+==============
+
+Changes:
+
+* Incorporates version of DDG Explorer that no longer supports storing provenance graphs in a database
+
 provViz v1.0.2 (Release date: 2018-12-04)
 ==============
 
