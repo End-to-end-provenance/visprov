@@ -36,3 +36,4 @@ RoxygenNote: 6.1.0
 Suggests:
   rdt,
   rdtLite
+Additional_repositories:  https://github.com/End-to-end-provenance/rdt
