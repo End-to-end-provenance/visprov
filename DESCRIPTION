@@ -1,7 +1,7 @@
 Package: provViz
 Title: Provenance Visualizer
-Version: 1.0.3
-Date: 2018-12-14
+Version: 1.0.4
+Date: 2018-12-20
 Authors@R: c( person( "Emery", "Boose", role = c("ctb"),
                       email = "boose@fas.harvard.edu"),
               person("Barbara", "Lerner", role = c("aut", "cre"),
