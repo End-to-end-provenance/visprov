@@ -139,7 +139,8 @@ prov.visualize <- function () {
 #' 
 #' @export
 #' @examples 
-#' \dontrun{prov.visualize.file ("prov.json")}
+#' testdata <- system.file("testdata", "prov.json", package = "provViz")
+#' prov.visualize.file (testdata)
 #' @rdname prov.visualize
 prov.visualize.file <- function (prov.file) {
   ddgexplorer(prov.file)
