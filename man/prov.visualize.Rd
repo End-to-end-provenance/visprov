@@ -38,7 +38,8 @@ These functions use provenance collected using the rdtLite or rdt packages.
 }
 \examples{
 \dontrun{prov.visualize ()}
-\dontrun{prov.visualize.file ("prov.json")}
+testdata <- system.file("testdata", "prov.json", package = "provViz")
+prov.visualize.file (testdata)
 \dontrun{prov.visualize.run ("script.R")}
 \dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
 }
