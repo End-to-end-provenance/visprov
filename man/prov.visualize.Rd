@@ -35,6 +35,8 @@ prov.visualize.run runs an R script and displays its provenance graph visually.
 }
 \details{
 These functions use provenance collected using the rdtLite or rdt packages.
+
+These functions do nothing when called non-interactively.
 }
 \examples{
 \dontrun{prov.visualize ()}

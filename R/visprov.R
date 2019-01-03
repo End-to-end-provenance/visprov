@@ -79,6 +79,8 @@ ddgexplorer <- function (json.path) {
 #' collected in this R session.
 #' 
 #' These functions use provenance collected using the rdtLite or rdt packages.
+#' 
+#' These functions do nothing when called non-interactively.
 #'
 #' @export
 #' @examples 
@@ -86,6 +88,9 @@ ddgexplorer <- function (json.path) {
 #' @rdname prov.visualize
 
 prov.visualize <- function () {
+  if (!interactive()) {
+    return()
+  }
 
   # Load the appropriate library
   loaded <- loadedNamespaces()
@@ -143,6 +148,10 @@ prov.visualize <- function () {
 #' prov.visualize.file (testdata)
 #' @rdname prov.visualize
 prov.visualize.file <- function (prov.file) {
+  if (!interactive()) {
+    return()
+  }
+  
   ddgexplorer(prov.file)
 }
 
@@ -163,6 +172,10 @@ prov.visualize.file <- function (prov.file) {
 #' \dontrun{prov.visualize.run ("script.R", tool = "rdtLite")}
 #' @rdname prov.visualize
 prov.visualize.run <- function (r.script.path,  ...) {
+  if (!interactive()) {
+    return()
+  }
+  
   # Load the appropriate library
   loaded <- loadedNamespaces()
   if ("rdtLite" %in% loaded) {
