@@ -18,7 +18,7 @@ prov.visualize (r.script.path = NULL, tool = "rdtLite")
 
 If you already have provenance stored in a file, call the prov.visualize.saved function:
 ```
-prov.visualize.saved (prov.file)
+prov.visualize.file (prov.file)
 ```
 
 
