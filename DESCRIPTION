@@ -1,7 +1,7 @@
 Package: provViz
 Title: Provenance Visualizer
-Version: 1.0.4
-Date: 2018-12-20
+Version: 1.0.5
+Date: 2019-06-03
 Authors@R: c( person( "Emery", "Boose", role = c("ctb"),
                       email = "boose@fas.harvard.edu"),
               person("Barbara", "Lerner", role = c("aut", "cre"),
@@ -37,8 +37,8 @@ Description: Displays provenance graphically for provenance collected by the 'rd
 License: GPL-3 | file LICENSE
 URL: https://github.com/ProvTools/provViz
 BugReports: https://github.com/End-to-end-provenance/provViz/issues
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests:
   rdt,
   rdtLite
-Additional_repositories:  https://end-to-end-provenance.github.io/drat/
+Additional_repositories: https://end-to-end-provenance.github.io/drat/
