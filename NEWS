@@ -3,6 +3,7 @@ provViz v1.0.5 (Release date: 2019-06-03)
 
 Changes:
 
+* Fixed bug related to the path to the provenance file containing an embedded space.
 * Parses either , or . as the decimal mark
 * Elapsed time now represents the time that an individual node takes, rather than time since the start of the script.
 * Creates the .ddg directory to store the preferences file if it does not exist. 
