@@ -16,9 +16,9 @@ To run a script and view its provenance, call the prov.visualize function:
 prov.visualize (r.script.path = NULL, tool = "rdtLite")
 ```
 
-If you already have provenance stored in a file, call the prov.visualize.saved function:
+If you already have provenance stored in a file, call the prov.visualize.file function:
 ```
-prov.visualize.saved (prov.file)
+prov.visualize.file (prov.file)
 ```
 
 
