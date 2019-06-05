@@ -28,13 +28,16 @@ ddg.explorer.port <- 6096
 # Parameter:  json.path - A file containing json produced by rdt or rdtLite.
 #
 .ddg.start.ddg.explorer <- function (json.path) {
+  # Quote the json.path so that if there are embedded spaces it will still
+  # be passed as one string
+  json.path <- paste0 ("\"", json.path, "\"")
+  
   jar.path <- "/provViz/java/DDGExplorer.jar"
   check.library.paths <- file.exists(paste(.libPaths(), jar.path, sep = ""))
   index <- min(which(check.library.paths == TRUE))
   ddgexplorer_path <- paste(.libPaths()[index], jar.path, sep = "")
 
-  # -s flag starts DDG Explorer as a server.  This allows each new ddg to show
-  # up in a new tab of an existing running DDG Explorer.
+  # Start DDG Explorer as a server
   systemResult <- system2("java",
       c("-jar", ddgexplorer_path, json.path, "-port", ddg.explorer.port),
       wait = FALSE)
