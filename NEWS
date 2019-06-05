@@ -1,3 +1,12 @@
+provViz v1.0.5 (Release date: 2019-06-03)
+==============
+
+Changes:
+
+* Parses either , or . as the decimal mark
+* Elapsed time now represents the time that an individual node takes, rather than time since the start of the script.
+* Creates the .ddg directory to store the preferences file if it does not exist. 
+
 provViz v1.0.3 (Release date: 2018-12-14)
 ==============
 
