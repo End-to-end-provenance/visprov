@@ -11,26 +11,13 @@ can view the provenance from the last execution using prov.visualize:
 prov.visualize()
 ```
 
-To run a script and view its provenance, call the prov.visualize function:
+To run a script and view its provenance, call the prov.visualize.run function:
 ```
-prov.visualize (r.script.path = NULL, tool = "rdtLite")
+prov.visualize.run(r.script.path)
 ```
 
 If you already have provenance stored in a file, call the prov.visualize.file function:
 ```
-prov.visualize.file (prov.file)
+prov.visualize.file(prov.file)
 ```
-
-
-**r.script.path** - The path to an R script.  This script will be 
-executed with provenance captured by rdt or rdtLite.  If r.script.path
-is NULL, the last provenance graph captured will be displayed.
-
-**tool** - which tool to use to capture proveannce.  Possible values are "rdtLite" or "rdt".
-
-**prov.file** - The name of a file containing provenance.
-
-## Known problems
-If the user calls this with NULL for r.script.path but no provenance
-has been captured yet in the session, there is a json string returned
-but it is not valid.
+where **r.script.path** is the path to an R script and **prov.file** is the name of a file containing provenance.
