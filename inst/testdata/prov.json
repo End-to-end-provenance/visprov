@@ -7,8 +7,26 @@
 	"agent" : {
 		"rdt:a1": {
 			"rdt:tool.name": "rdtLite",
-			"rdt:tool.version": "1.1.1",
-			"rdt:json.version": "2.2"
+			"rdt:tool.version": "1.2.1",
+			"rdt:json.version": "2.3",
+			"rdt:args.names": [
+				"overwrite",
+				"details",
+				"snapshot.size",
+				"save.debug"
+			],
+			"rdt:args.values": [
+				"TRUE",
+				"TRUE",
+				"0",
+				"FALSE"
+			],
+			"rdt:args.types": [
+				"logical",
+				"logical",
+				"numeric",
+				"logical"
+			]
 		}
 	},
 
@@ -16,8 +34,8 @@
 		"rdt:p1": {
 			"rdt:name": "prov.R",
 			"rdt:type": "Start",
-			"rdt:elapsedTime": "0.848",
-			"rdt:scriptNum": "NA",
+			"rdt:elapsedTime": "0.914",
+			"rdt:scriptNum": 1,
 			"rdt:startLine": "NA",
 			"rdt:startCol": "NA",
 			"rdt:endLine": "NA",
@@ -26,7 +44,7 @@
 		"rdt:p2": {
 			"rdt:name": "a <- 1:5",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.133",
+			"rdt:elapsedTime": "0.13",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 1,
 			"rdt:startCol": 1,
@@ -36,7 +54,7 @@
 		"rdt:p3": {
 			"rdt:name": "b <- a * 2",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.097",
+			"rdt:elapsedTime": "0.109",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 2,
 			"rdt:startCol": 1,
@@ -46,7 +64,7 @@
 		"rdt:p4": {
 			"rdt:name": "df <- data.frame (a, b)",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.067",
+			"rdt:elapsedTime": "0.072",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 3,
 			"rdt:startCol": 1,
@@ -57,7 +75,7 @@
 			"rdt:name": "prov.R",
 			"rdt:type": "Finish",
 			"rdt:elapsedTime": "0.01",
-			"rdt:scriptNum": "NA",
+			"rdt:scriptNum": 1,
 			"rdt:startLine": "NA",
 			"rdt:startCol": "NA",
 			"rdt:endLine": "NA",
@@ -102,24 +120,24 @@
 
 		"rdt:environment": {
 			"rdt:name": "environment",
-			"rdt:architecture": "x86_64",
-			"rdt:operatingSystem": "darwin15.6.0",
+			"rdt:architecture": "x86_64-apple-darwin17.0 (64-bit)",
+			"rdt:operatingSystem": "macOS Catalina 10.15.5",
 			"rdt:language": "R",
-			"rdt:langVersion": "R version 3.6.0 (2019-04-26)",
+			"rdt:langVersion": "R version 4.0.0 (2020-04-24)",
 			"rdt:script": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts/prov.R",
 			"rdt:scriptTimeStamp": "2019-08-06T11.29.58EDT",
-			"rdt:totalElapsedTime": "1.155",
+			"rdt:totalElapsedTime": "1.235",
 			"rdt:sourcedScripts": "",
 			"rdt:sourcedScriptTimeStamps": "",
 			"rdt:workingDirectory": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts",
 			"rdt:provDirectory": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts/prov_prov",
-			"rdt:provTimestamp": "2019-08-22T14.00.43EDT",
+			"rdt:provTimestamp": "2020-06-30T18.17.05EDT",
 			"rdt:hashAlgorithm": "md5"
 		},
 
 		"rdt:l1": {
 			"name": "base",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -127,7 +145,7 @@
 		},
 		"rdt:l2": {
 			"name": "datasets",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -135,7 +153,7 @@
 		},
 		"rdt:l3": {
 			"name": "ggplot2",
-			"version": "3.1.1",
+			"version": "3.3.2",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -143,7 +161,7 @@
 		},
 		"rdt:l4": {
 			"name": "graphics",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -151,7 +169,7 @@
 		},
 		"rdt:l5": {
 			"name": "grDevices",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -159,7 +177,7 @@
 		},
 		"rdt:l6": {
 			"name": "methods",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -167,7 +185,7 @@
 		},
 		"rdt:l7": {
 			"name": "stats",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
@@ -175,7 +193,7 @@
 		},
 		"rdt:l8": {
 			"name": "utils",
-			"version": "3.6.0",
+			"version": "4.0.0",
 			"prov:type": {
 				"$": "prov:Collection",
 				"type": "xsd:QName"
