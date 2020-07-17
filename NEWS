@@ -1,3 +1,14 @@
+provViz v1.0.7 (Release date: 2020-07-17)
+==============
+
+Changes:
+
+* Added support for displaying provenance from Python scripts.
+* Show execution time when sorting operations by execution time
+* When showing scripts, it now displays the saved copies rather than the originals.
+* Fixed bugs related to sourced scripts.
+
+
 provViz v1.0.6 (Release date: ???)
 ==============
 
