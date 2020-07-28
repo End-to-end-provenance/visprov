@@ -7,7 +7,7 @@
 	"agent" : {
 		"rdt:a1": {
 			"rdt:tool.name": "rdtLite",
-			"rdt:tool.version": "1.2.1",
+			"rdt:tool.version": "1.3",
 			"rdt:json.version": "2.3",
 			"rdt:args.names": [
 				"overwrite",
@@ -34,7 +34,7 @@
 		"rdt:p1": {
 			"rdt:name": "prov.R",
 			"rdt:type": "Start",
-			"rdt:elapsedTime": "0.914",
+			"rdt:elapsedTime": "0.952",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": "NA",
 			"rdt:startCol": "NA",
@@ -44,7 +44,7 @@
 		"rdt:p2": {
 			"rdt:name": "a <- 1:5",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.13",
+			"rdt:elapsedTime": "0.142",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 1,
 			"rdt:startCol": 1,
@@ -54,7 +54,7 @@
 		"rdt:p3": {
 			"rdt:name": "b <- a * 2",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.109",
+			"rdt:elapsedTime": "0.107",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 2,
 			"rdt:startCol": 1,
@@ -64,7 +64,7 @@
 		"rdt:p4": {
 			"rdt:name": "df <- data.frame (a, b)",
 			"rdt:type": "Operation",
-			"rdt:elapsedTime": "0.072",
+			"rdt:elapsedTime": "0.075",
 			"rdt:scriptNum": 1,
 			"rdt:startLine": 3,
 			"rdt:startCol": 1,
@@ -121,17 +121,19 @@
 		"rdt:environment": {
 			"rdt:name": "environment",
 			"rdt:architecture": "x86_64-apple-darwin17.0 (64-bit)",
-			"rdt:operatingSystem": "macOS Catalina 10.15.5",
+			"rdt:operatingSystem": "macOS Catalina 10.15.6",
 			"rdt:language": "R",
 			"rdt:langVersion": "R version 4.0.0 (2020-04-24)",
 			"rdt:script": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts/prov.R",
 			"rdt:scriptTimeStamp": "2019-08-06T11.29.58EDT",
-			"rdt:totalElapsedTime": "1.235",
+			"rdt:scriptHash": "06c9769170d333910caad3b05a3b30fa",
+			"rdt:totalElapsedTime": "1.286",
 			"rdt:sourcedScripts": "",
 			"rdt:sourcedScriptTimeStamps": "",
+			"rdt:sourcedScriptHashes": "",
 			"rdt:workingDirectory": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts",
 			"rdt:provDirectory": "/Users/blerner/Documents/Process/DataProvenance/workspace/provViz/inst/testscripts/prov_prov",
-			"rdt:provTimestamp": "2020-06-30T18.17.05EDT",
+			"rdt:provTimestamp": "2020-07-27T17.41.49EDT",
 			"rdt:hashAlgorithm": "md5"
 		},
 
